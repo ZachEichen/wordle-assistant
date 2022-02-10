@@ -49,7 +49,7 @@ class Wordle:
         for guess, resp in guesses_list:
             self.add_guess(guess, resp)
 
-    def get_possible_words(self, word_pool="sc_words", verbose=False):
+    def get_possible_words(self, word_pool="sourcecode words", verbose=False):
         if word_pool == "valid_words":
             self.possible_words = self.words
         elif word_pool == "nltk_words":
@@ -101,11 +101,12 @@ class Wordle:
         word_pool="valid_words",
         print_best_entropy:bool = True,
         use_tqdm:bool = True, 
-        give_distribution = False
+        give_distribution = False,
+        hard_threshold = 8 
         ):
         
         if hard_mode == 'Default': 
-            hard_mode  = len(self.possible_words) <= 8
+            hard_mode  = len(self.possible_words) <= hard_threshold
             print(f"using hard mode: {hard_mode}")
         elif type(hard_mode) == str: 
             raise  ValueError('invalid arg for hard_mode')
